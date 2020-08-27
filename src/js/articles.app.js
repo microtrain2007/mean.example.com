@@ -160,6 +160,42 @@ var articlesApp = (function () {
     }
   }
 
+  // View Article by slug outside of session
+  function viewArticle(slug){
+
+    let uri = `${window.location.origin}/api/articles/${slug}`;
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', uri);
+
+    xhr.setRequestHeader(
+      'Content-Type',
+      'application/json; charset=UTF-8'
+    );
+
+    xhr.send();
+
+    xhr.onload = function(){
+
+      let app = document.getElementById('app');
+      let data = JSON.parse(xhr.response);
+      let card = '';
+
+      card = `<div class="card">
+        <div class="card-header clearfix">
+          <h2 class="h3 float-left">${data.article.title}</h2>
+        </div>
+        <div class="card-body">
+          <div class="blockquote">${data.article.body}</div>
+          <br>
+          <div>Tagged: <em>${data.article.keywords}</em></div>
+        </div>
+      </div>
+      `;
+
+      app.innerHTML = card;
+    }
+  }
+
   function editArticle(id) {
 
     let uri = `${window.location.origin}/api/articles/${id}`;
