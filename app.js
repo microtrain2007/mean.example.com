@@ -10,6 +10,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var Users = require('./models/users');
+var Articles = require('./models/articles');
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
